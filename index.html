@@ -1,299 +1,148 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>PawsConnect</title>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet"/>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script>
-tailwind.config = {
-  darkMode: "class",
-  theme: {
-    extend: {
-      colors: {
-        "primary": "#f97706",
-        "background-light": "#f8f7f5",
-        "background-dark": "#23180f",
-      },
-      fontFamily: {
-        "display": ["Plus Jakarta Sans"],
-      },
-    },
-  },
-};
-</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NOVA | Portfolio</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;800&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- AOS -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    h1,h2 { font-family: 'Space Grotesk', sans-serif; }
+  </style>
 </head>
+<body class="bg-white text-black">
 
-<body class="bg-background-light dark:bg-background-dark font-display">
-
-<!-- Header -->
-<header class="bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm sticky top-0 z-50 shadow-sm">
-  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-between h-20">
-      <div class="flex items-center gap-3">
-        <svg class="h-8 w-8 text-primary" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-          <path clip-rule="evenodd" d="M12.0799 24L4 19.2479L9.95537 8.75216L18.04 13.4961L18.0446 4H29.9554L29.96 13.4961L38.0446 8.75216L44 19.2479L35.92 24L44 28.7521L38.0446 39.2479L29.96 34.5039L29.9554 44H18.0446L18.04 34.5039L9.95537 39.2479L4 28.7521L12.0799 24Z" fill="currentColor" fill-rule="evenodd"></path>
-        </svg>
-        <a href="home.html" class="text-2xl font-bold text-background-dark dark:text-background-light hover:text-primary transition-colors duration-200">PawsConnect</a>
-      </div>
-      <nav class="hidden md:flex items-center gap-6">
-        <a class="text-lg font-medium text-background-dark/70 dark:text-background-light/70 hover:text-primary dark:hover:text-primary transition-colors" href="aboutus.html">About Us</a>
-      </nav>
-    </div>
-  </div>
+<!-- HERO -->
+<header class="h-[50vh] bg-black text-white flex flex-col justify-center items-center text-center px-4">
+  <h1 class="text-4xl md:text-6xl font-bold tracking-tight" data-aos="fade-down">NOVA</h1>
+  <p class="mt-2 opacity-80" data-aos="fade-up" data-aos-delay="200">
+    Full Stack & Design Studio
+  </p>
 </header>
 
-<!-- Hero -->
-<section class="relative h-[60vh] min-h-[400px] flex items-center justify-center text-center text-white bg-cover bg-center"
-  style='background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url("https://images.unsplash.com/photo-1587300003388-59208cc962cb?auto=format&fit=crop&w=1500&q=80");'>
-  <div class="max-w-3xl px-4">
-    <h2 class="text-4xl md:text-6xl font-extrabold tracking-tight">Foster a Puppy</h2>
-    <p class="mt-4 text-lg md:text-xl max-w-2xl mx-auto">
-      If you see any puppies that need a home, please report it here and help save lives 🐶
-    </p>
-  </div>
-</section>
+<!-- WHAT WE DO -->
+<section class="py-24 px-5 max-w-6xl mx-auto">
+  <h2 class="text-2xl uppercase text-center mb-14" data-aos="fade-up">
+    What We Do
+  </h2>
 
-<!-- Report Form -->
-<section class="py-20 bg-background-light dark:bg-background-dark">
-  <div class="container mx-auto px-6 max-w-lg">
-    <div class="text-center mb-12">
-      <h3 class="text-3xl font-bold text-background-dark dark:text-background-light">Report a Sighting</h3>
+  <div class="grid gap-6 md:grid-cols-3">
+    <div class="border p-10 hover:bg-black hover:text-white transition" data-aos="fade-up">
+      <h3 class="font-semibold mb-2">Full Stack</h3>
+      <p>Building powerful backends and interactive frontends.</p>
     </div>
 
-    <form id="reportForm" class="space-y-6">
-      <!-- Upload + Camera -->
-      <div class="text-center">
-        <label class="block text-sm font-medium text-background-dark dark:text-background-light mb-2">Add Photo</label>
-        <div class="flex flex-wrap justify-center gap-3">
-          <button type="button" id="uploadBtn" class="px-5 py-2 bg-primary text-white rounded-lg hover:bg-opacity-90 transition">Upload</button>
-          <button type="button" id="cameraBtn" class="px-5 py-2 bg-background-dark text-background-light rounded-lg hover:bg-opacity-90 transition dark:bg-background-light dark:text-background-dark">Camera</button>
-          <button type="button" id="switchCamBtn" class="hidden px-5 py-2 bg-primary text-white rounded-lg hover:bg-opacity-90 transition">Switch</button>
-        </div>
-        <input type="file" id="photoInput" accept="image/*" class="hidden" />
-        <div class="mt-5 relative w-72 h-72 mx-auto bg-white/10 rounded-lg flex items-center justify-center overflow-hidden shadow">
-          <video id="cameraStream" autoplay playsinline class="hidden absolute inset-0 w-full h-full object-cover rounded-lg"></video>
-          <canvas id="photoCanvas" class="hidden"></canvas>
-          <img id="photoPreview" class="hidden absolute inset-0 w-full h-full object-cover rounded-lg" alt="Preview" />
-          <span id="placeholderText" class="text-sm text-black/70">Image preview will appear here</span>
-        </div>
-        <button type="button" id="captureBtn" class="hidden mt-4 px-6 py-2 bg-primary text-white rounded-lg font-bold">Capture</button>
-      </div>
+    <div class="border p-10 hover:bg-black hover:text-white transition" data-aos="fade-up" data-aos-delay="100">
+      <h3 class="font-semibold mb-2">Posters</h3>
+      <p>Social media graphics that grab attention instantly.</p>
+    </div>
 
-      <!-- Location -->
-      <div>
-        <label for="location" class="block text-sm font-medium text-background-dark dark:text-background-light mb-2">Location</label>
-        <div class="flex gap-2">
-          <input id="location" type="text" readonly class="form-input flex-grow rounded-lg border-primary/30 bg-white/50 focus:ring-primary text-background-dark placeholder-background-dark/40" placeholder="Click 'Get Location'">
-          <button type="button" id="getLocation" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-opacity-90 transition">Get</button>
-        </div>
-      </div>
-
-      <div>
-        <label for="mobile" class="block text-sm font-medium text-background-dark dark:text-background-light mb-2">Mobile Number</label>
-        <input id="mobile" type="tel" required class="form-input w-full rounded-lg border-primary/30 bg-white/50 focus:ring-primary text-background-dark placeholder-background-dark/40" placeholder="+91 98765 43210">
-      </div>
-      <div>
-        <label for="email" class="block text-sm font-medium text-background-dark dark:text-background-light mb-2">Email</label>
-        <input id="email" type="email" required class="form-input w-full rounded-lg border-primary/30 bg-white/50 focus:ring-primary text-background-dark placeholder-background-dark/40" placeholder="your.name@gmail.com">
-      </div>
-      <!-- Size -->
-<div>
-  <label for="size" class="block text-sm font-medium text-background-dark dark:text-background-light mb-2">Size</label>
-  <select id="size" required class="form-input w-full rounded-lg border-primary/30 bg-white/50 focus:ring-primary text-background-dark placeholder-background-dark/40">
-    <option value="" disabled selected>Select size</option>
-    <option value="small">Small</option>
-    <option value="medium">Medium</option>
-    <option value="large">Large</option>
-  </select>
-</div>
-
-<!-- Gender -->
-<div>
-  <label for="gender" class="block text-sm font-medium text-background-dark dark:text-background-light mb-2">Gender</label>
-  <select id="gender" required class="form-input w-full rounded-lg border-primary/30 bg-white/50 focus:ring-primary text-background-dark placeholder-background-dark/40">
-    <option value="" disabled selected>Select gender</option>
-    <option value="male">Male</option>
-    <option value="female">Female</option>
-  </select>
-</div>
-
-<!-- Behavior -->
-<div>
-  <label for="behavior" class="block text-sm font-medium text-background-dark dark:text-background-light mb-2">Behavior</label>
-  <select id="behavior" required class="form-input w-full rounded-lg border-primary/30 bg-white/50 focus:ring-primary text-background-dark placeholder-background-dark/40">
-    <option value="" disabled selected>Select behavior</option>
-    <option value="active">Active</option>
-    <option value="calm">Calm</option>
-  </select>
-</div>
-
-<!-- Diseases -->
-<div>
-  <label for="diseases" class="block text-sm font-medium text-background-dark dark:text-background-light mb-2">Any Diseases</label>
-  <input id="diseases" type="text" placeholder="List if any" class="form-input w-full rounded-lg border-primary/30 bg-white/50 focus:ring-primary text-background-dark placeholder-background-dark/40" />
-</div>
-
-      <div>
-        <label for="message" class="block text-sm font-medium text-background-dark dark:text-background-light mb-2">Message</label>
-        <textarea id="message" rows="4" required class="form-textarea w-full rounded-lg border-primary/30 bg-white/50 focus:ring-primary text-background-dark placeholder-background-dark/40" placeholder="Describe the puppy..."></textarea>
-      </div>
-
-      <div class="text-center">
-        <button type="submit" class="px-10 py-3 rounded-lg bg-primary text-white hover:bg-opacity-90 transition font-bold text-lg">Submit Report</button>
-      </div>
-    </form>
+    <div class="border p-10 hover:bg-black hover:text-white transition" data-aos="fade-up" data-aos-delay="200">
+      <h3 class="font-semibold mb-2">Strategy</h3>
+      <p>Digital solutions that scale with your business growth.</p>
+    </div>
   </div>
 </section>
 
-<!-- Footer -->
-<footer class="bg-background-dark/95 text-background-light/60 py-8 text-center">
-  <p>© 2025 PawsConnect. All rights reserved.</p>
+<!-- RECENT WORKS -->
+
+<section class="bg-gray-100 py-24">
+    <div class="max-w-6xl mx-auto px-5">
+      <h2 class="text-2xl uppercase text-center mb-4" data-aos="fade-up">
+        Recent Work
+      </h2>
+      <p class="text-center text-black/60 mb-16" data-aos="fade-up" data-aos-delay="100">
+        Selected projects showcasing our design & development skills
+      </p>
+  
+      <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
+        
+        <!-- CARD -->
+        <div class="relative aspect-square overflow-hidden border bg-white shadow-sm" data-aos="zoom-in">
+          <img src="image.png" class="w-full h-full object-cover">
+          <div class="absolute bottom-0 w-full p-5 bg-gradient-to-t from-black/50 to-transparent text-white">
+            <small class="uppercase text-xs opacity-70">Web Development</small>
+            <p>UI for a social service website</p>
+          </div>
+        </div>
+  
+        <div class="relative aspect-square overflow-hidden border bg-white shadow-sm" data-aos="zoom-in" data-aos-delay="100">
+          <img src="image copy.png" class="w-full h-full object-cover">
+          <div class="absolute bottom-0 w-full p-5 bg-gradient-to-t from-black/50 to-transparent text-white">
+            <small class="uppercase text-xs opacity-70">Web Development</small>
+            <p>Product landing page</p>
+          </div>
+        </div>
+  
+        <div class="relative aspect-square overflow-hidden border bg-white shadow-sm" data-aos="zoom-in" data-aos-delay="200">
+          <img src="image copy 2.png" class="w-full h-full object-cover">
+          <div class="absolute bottom-0 w-full p-5 bg-gradient-to-t from-black/50 to-transparent text-white">
+            <small class="uppercase text-xs opacity-70">Full Stack</small>
+            <p>Mentor Platform</p>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+  </section>
+  
+<!-- FOOTER -->
+<footer class="bg-black text-white px-5 pt-20 pb-10">
+  <div class="max-w-6xl mx-auto grid gap-10 md:grid-cols-4 border-b border-white/20 pb-12">
+
+    <div>
+      <h3 class="text-xl mb-3">NOVA</h3>
+      <p class="text-white/60 text-sm">
+        Turning complex ideas into simple digital experiences.
+      </p>
+    </div>
+
+    <div class="space-y-3">
+        <strong class="block uppercase text-xs mb-1">Email</strong>
+        <a href="mailto:novacreation2k26@gmail.com" class="text-white/70 text-sm hover:text-white underline">
+          novacreation2k26@gmail.com
+        </a>
+      
+        <strong class="block uppercase text-xs mt-4 mb-1">Call</strong>
+        <a href="tel:+918438119735" class="text-white/70 text-sm hover:text-white underline">
+          +91 8438119735
+        </a>
+      </div>
+      
+    <div>
+      <strong class="block uppercase text-xs mb-2">Location</strong>
+      <p class="text-white/70 text-sm mb-3">Global / Remote</p>
+      <a href="https://www.instagram.com/nova_creationzz/?utm_source=ig_web_button_share_sheet" class="text-white/60 hover:text-white text-sm" target="_blank">Instagram</a>
+    </div>
+
+    <!-- COLLAB FORM -->
+<div>
+    <strong class="block uppercase text-xs mb-4">Collaborate</strong>
+  
+    <iframe 
+      src="https://docs.google.com/forms/d/e/1FAIpQLSf59SKJylqWA-D2fYH3Iwjoq5BQimfKs7_MWPhXs_g7jZpEIg/viewform?embedded=true"
+      class="w-full h-[520px] border border-white/20 rounded-sm"
+      loading="lazy">
+    </iframe>
+  </div>
+  
+
+
 </footer>
 
+<!-- AOS -->
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 <script>
-let video = document.getElementById("cameraStream");
-let canvas = document.getElementById("photoCanvas");
-let photoPreview = document.getElementById("photoPreview");
-let placeholder = document.getElementById("placeholderText");
-let captureBtn = document.getElementById("captureBtn");
-let switchCamBtn = document.getElementById("switchCamBtn");
-let uploadInput = document.getElementById("photoInput");
-let currentStream, useFrontCamera = false, imageData = null;
-
-// Upload photo
-document.getElementById("uploadBtn").addEventListener("click", () => uploadInput.click());
-uploadInput.addEventListener("change", e => {
-  const file = e.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = ev => {
-    imageData = ev.target.result;
-    photoPreview.src = imageData;
-    placeholder.classList.add("hidden");
-    photoPreview.classList.remove("hidden");
-    video.classList.add("hidden");
-    captureBtn.classList.add("hidden");
-    switchCamBtn.classList.add("hidden");
-    stopCamera();
-  };
-  reader.readAsDataURL(file);
-});
-  
-// Camera mode
-document.getElementById("cameraBtn").addEventListener("click", async () => {
-  stopCamera();
-  placeholder.classList.add("hidden");
-  video.classList.remove("hidden");
-  captureBtn.classList.remove("hidden");
-  switchCamBtn.classList.remove("hidden");
-  photoPreview.classList.add("hidden");
-  try {
-    currentStream = await navigator.mediaDevices.getUserMedia({
-      video: { facingMode: useFrontCamera ? "user" : "environment" }
-    });
-    video.srcObject = currentStream;
-  } catch {
-    alert("Please allow camera access.");
-  }
-});
-
-// Capture
-captureBtn.addEventListener("click", () => {
-  const ctx = canvas.getContext("2d");
-  canvas.width = video.videoWidth;
-  canvas.height = video.videoHeight;
-  ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-  imageData = canvas.toDataURL("image/png");
-  photoPreview.src = imageData;
-  photoPreview.classList.remove("hidden");
-  video.classList.add("hidden");
-  captureBtn.classList.add("hidden");
-  switchCamBtn.classList.add("hidden");
-  stopCamera();
-});
-
-// Switch front/back
-switchCamBtn.addEventListener("click", () => {
-  useFrontCamera = !useFrontCamera;
-  document.getElementById("cameraBtn").click();
-});
-
-// Stop camera stream
-function stopCamera() {
-  if (currentStream) {
-    currentStream.getTracks().forEach(t => t.stop());
-    currentStream = null;
-  }
-}
-
-// Get GPS location
-document.getElementById("getLocation").addEventListener("click", async () => {
-  if (!navigator.geolocation) return alert("❌ Geolocation not supported");
-  try {
-    const pos = await new Promise((res, rej) => navigator.geolocation.getCurrentPosition(res, rej, {
-      enableHighAccuracy: true,
-      timeout: 15000,
-      maximumAge: 0
-    }));
-    const { latitude, longitude, accuracy } = pos.coords;
-    const mapLink = `https://www.google.com/maps?q=${latitude},${longitude}`;
-    alert(`✅ Location captured!\nLat: ${latitude}\nLon: ${longitude}\nAccuracy: ±${accuracy}m`);
-    document.getElementById("location").value = mapLink;
-  } catch (err) {
-    alert("⚠️ Couldn't get GPS. Please enable location and try again.");
-    console.error(err);
-  }
-});
-
-// Submit report
-// Submit report
-document.getElementById("reportForm").addEventListener("submit", e => {
-  e.preventDefault();
-
-  const loc = document.getElementById("location").value.trim();
-  const mob = document.getElementById("mobile").value.trim();
-  const email = document.getElementById("email").value.trim();
-  const msg = document.getElementById("message").value.trim();
-  const size = document.getElementById("size").value;
-  const gender = document.getElementById("gender").value;
-  const behavior = document.getElementById("behavior").value;
-  const diseases = document.getElementById("diseases").value.trim() || "None";
-
-  if (!imageData) return alert("📸 Please upload or capture a photo first.");
-  if (!loc) return alert("📍 Please get the location.");
-  if (!mob) return alert("📱 Please enter mobile number.");
-  if (!email) return alert("📧 Please enter email.");
-  if (!msg) return alert("📝 Please write a message about the puppy.");
-  if (!size) return alert("🐶 Please select the size of the puppy.");
-  if (!gender) return alert("⚥ Please select the gender of the puppy.");
-  if (!behavior) return alert("🐾 Please select the behavior of the puppy.");
-
-  const reports = JSON.parse(localStorage.getItem("pawsAdoptions") || "[]"); // consistent key
-  reports.push({
-    type: "foster",
-    location: loc,
-    mobile: mob,
-    email,
-    msg,
-    size,
-    gender,
-    behavior,
-    diseases,
-    photo: imageData,
-    time: new Date().toLocaleString(),
-    rescued: false
-  });
-
-  localStorage.setItem("pawsAdoptions", JSON.stringify(reports));
-
-  alert("✅ Report submitted successfully!");
-  document.getElementById("reportForm").reset();
-});
-
+  AOS.init({ duration: 800, once: true });
 </script>
 
 </body>
